@@ -1,0 +1,16 @@
+{
+    "name": "pchance",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "type": "module",
+    "author": "MMiyako",
+    "license": "ISC",
+    "dependencies": {
+        "@inquirer/prompts": "^7.0.1",
+        "cheerio": "^1.0.0"
+    }
+}
