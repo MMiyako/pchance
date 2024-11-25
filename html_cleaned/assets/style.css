@@ -1,10 +1,10 @@
 body {
-    background-image: url('bg/retina_wood.png');
+    background-color: #ebeff8;
     font-family: 'Roboto';
 }
 
 .page-header {
-    background-image: url('bg/floor_tile.png');
+    background-color: #ced3da;
     display: flex;
     align-items: center;
     gap: 3rem;

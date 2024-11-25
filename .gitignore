@@ -2,3 +2,4 @@ node_modules
 data
 html_raw
 html_cleaned/*.html
+resources

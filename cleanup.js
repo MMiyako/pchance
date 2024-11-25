@@ -24,6 +24,10 @@ import { select } from "@inquirer/prompts";
     const html = fs.readFileSync(`html_raw/${answer}.html`, "utf-8");
     const $ = cheerio.load(html);
 
+    let list = [];
+    let currentDate = new Date().toISOString().slice(0, 10);
+    let galleryInfo = answer.split("_");
+
     let images = $(".imageCtn");
     let count = images.length;
 
@@ -31,16 +35,22 @@ import { select } from "@inquirer/prompts";
         let dataIndex = count - index;
         $(element).attr("data-index", dataIndex);
         $(element).prepend(`<div class="index">No. ${dataIndex}</div>`);
+
+        list.push({
+            index: dataIndex,
+            imageId: $(element).attr("data-image-id"),
+        });
     });
 
     console.log("Images: " + count);
 
+    fs.writeFileSync(`data/images_index/${answer}_${currentDate}.json`, JSON.stringify(list, null, 4));
+
+    console.log(`File Created: data/images_index/${answer}_${currentDate}.json`);
+
     $(".imageWrapper").removeAttr("style");
     $(".imageWrapper").find(".info-btn").remove();
     $(".imageWrapper").find(".image-hover-ctn").remove();
-
-    let currentDate = new Date().toISOString().slice(0, 10);
-    let galleryInfo = answer.split("_");
 
     $("head").append(`
         <meta charset="UTF-8">
@@ -81,7 +91,16 @@ import { select } from "@inquirer/prompts";
     });
 
     fs.writeFileSync(`html_cleaned/${answer}_${currentDate}.html`, prettifiedHtml, "utf-8");
+    console.log(`File Created: html_cleaned/${answer}_${currentDate}.html`);
 
-    console.log(`Output: html_cleaned/${answer}_${currentDate}.html`);
+    let resourcesPath = `resources/${answer}_${currentDate}`;
+
+    if (!fs.existsSync(resourcesPath)) {
+        fs.mkdirSync(resourcesPath, { recursive: true });
+        console.log(`Folder Created: ${resourcesPath}`);
+    } else {
+        console.log(`Folder Exists: ${resourcesPath}`);
+    }
+
     console.log("--------------------------------------------------");
 })();
