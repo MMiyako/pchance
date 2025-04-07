@@ -36,9 +36,14 @@ import { select } from "@inquirer/prompts";
         $(element).attr("data-index", dataIndex);
         $(element).prepend(`<div class="index">No. ${dataIndex}</div>`);
 
+        let image = $(element).find(".image");
+        let url = image.attr('src');
+        let type = url.substring(url.lastIndexOf(".") + 1);
+
         list.push({
             index: dataIndex,
             imageId: $(element).attr("data-image-id"),
+            type: type,
         });
     });
 
