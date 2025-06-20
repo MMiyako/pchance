@@ -37,13 +37,16 @@ import { select } from "@inquirer/prompts";
         $(element).prepend(`<div class="index">No. ${dataIndex}</div>`);
 
         let image = $(element).find(".image");
-        let url = image.attr('src');
+        let url = image.attr("src");
         let type = url.substring(url.lastIndexOf(".") + 1);
+        let ratio = image.attr("style").match(/aspect-ratio:\s*(\d+)\s*\/\s*(\d+)/);
 
         list.push({
             index: dataIndex,
             imageId: $(element).attr("data-image-id"),
             type: type,
+            height: ratio[2],
+            width: ratio[1],
         });
     });
 
