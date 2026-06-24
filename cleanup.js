@@ -56,6 +56,7 @@ import { select } from "@inquirer/prompts";
 
     console.log(`File Created: data/images_index/${answer}_${currentDate}.json`);
 
+    $(".imageCtn").removeAttr("style");
     $(".imageWrapper").removeAttr("style");
     $(".imageWrapper").find(".info-btn").remove();
     $(".imageWrapper").find(".image-hover-ctn").remove();
